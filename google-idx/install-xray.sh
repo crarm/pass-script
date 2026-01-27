@@ -47,7 +47,7 @@ chmod +x startup.sh
 $PWD/startup.sh
 
 # 6. enter export domain
-read -p "请输入$PORT端口的外部访问链接：" DOMAIN
+read -p "请输入端口$PORT的外部访问链接：" DOMAIN
 
 # 7. print node info
 echo '节点信息如下：'
