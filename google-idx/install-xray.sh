@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 read -p "设置节点使用的端口[1-65535]（直接回车使用默认值：8080）：" port
-sleep 1
+
 if [[ -z $PORT ]]; then
 PORT=8080
 fi
