@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-PORT="${PORT:-8080}"
-UUID="${UUID:-2584b733-9095-4bec-a7d5-62b473540f7a}"
-
 read "设置节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" port
 sleep 1
 if [[ -z $PORT ]]; then
