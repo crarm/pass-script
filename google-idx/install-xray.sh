@@ -1,14 +1,17 @@
 #!/usr/bin/env sh
 
-read -p "设置节点使用的端口[1-65535]（直接回车使用默认值：8080）：" port
+RPORT=8080
+RUUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
+
+read -p "设置节点使用的端口[1-65535]（直接回车使用默认值：$RPORT）：" port
 
 if [[ -z $PORT ]]; then
-PORT=8080
+PORT=$RPORT
 fi
 
-read -p "请输入UUID（直接回车使用默认值：3ef440dc-8eac-4d33-b50d-382f54507e0c）：" UUID
+read -p "请输入UUID（直接回车使用默认值：$RUUID）：" UUID
 if [[ -z ${UUID} ]]; then
-UUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
+UUID=$RUUID
 fi
 
 # 1. init directory
