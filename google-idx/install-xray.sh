@@ -3,18 +3,18 @@
 PORT="${PORT:-8080}"
 UUID="${UUID:-2584b733-9095-4bec-a7d5-62b473540f7a}"
 
-readp "设置节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" port
+read "设置节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" port
 sleep 1
 if [[ -z $PORT ]]; then
 PORT=$(shuf -i 10000-65535 -n 1)
 until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] 
 do
-[[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] && yellow "\n端口被占用，请重新输入端口" && readp "自定义端口:" PORT
+[[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] && yellow "\n端口被占用，请重新输入端口" && read "自定义端口:" PORT
 done
 else
 until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]]
 do
-[[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] && yellow "\n端口被占用，请重新输入端口" && readp "自定义端口:" PORT
+[[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] && yellow "\n端口被占用，请重新输入端口" && read "自定义端口:" PORT
 done
 fi
 sleep 1
