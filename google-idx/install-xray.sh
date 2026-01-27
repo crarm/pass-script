@@ -15,12 +15,12 @@ mv xray $Xray
 rm -f $Xray.zip
 
 # 3. add config file
-wget -O config.json https://raw.githubusercontent.com/vevc/one-node/refs/heads/main/google-idx/xray-config-template.json
+wget -O config.json https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/xray-config-template.json
 sed -i 's/$PORT/'$PORT'/g' config.json
 sed -i 's/$UUID/'$UUID'/g' config.json
 
 # 4. create startup.sh
-wget https://raw.githubusercontent.com/vevc/one-node/refs/heads/main/google-idx/startup.sh
+wget https:https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/startup.sh
 sed -i 's#$PWD#'$PWD'#g' startup.sh
 chmod +x startup.sh
 
