@@ -11,7 +11,7 @@
     # pkgs.nodejs_20
     # pkgs.nodePackages.nodemon
     pkgs.sudo
-    pkgs.busybox
+    pkgs.nginx
   ];
   # Sets environment variables in the workspace
   env = {};
