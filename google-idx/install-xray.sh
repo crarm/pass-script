@@ -53,9 +53,9 @@ read -p "请输入端口【 $PORT 】的外部访问链接：" DOMAIN
 # 7. print node info
 echo '节点信息如下：'
 echo '---------------------------------------------------------------'
-echo "vless://$UUID@e$DOMAIN:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp"
+echo "vless://$UUID@$DOMAIN:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp"
 echo '---------------------------------------------------------------'
 echo "节点信息保存在文件：$PWD/node-info.txt"
-echo "vless://$UUID@e$DOMAIN:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp" > node-info.txt
+echo "vless://$UUID@$DOMAIN:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp" > node-info.txt
 
 
