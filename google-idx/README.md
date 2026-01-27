@@ -9,5 +9,5 @@ bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/m
 
 ```bash
 export USER=google PASS=123456
-bash <(curl -sSL https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/ttyd.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/ttyd.sh)
 ```
