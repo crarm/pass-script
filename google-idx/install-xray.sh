@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-
 read -p "设置节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" PORT
 sleep 1
 if [[ -z $PORT ]]; then
