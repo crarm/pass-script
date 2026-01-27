@@ -19,7 +19,7 @@ done
 fi
 sleep 1
 
-read -p "请输入UUID（默认为3ef440dc-8eac-4d33-b50d-382f54507e0c）：" UUID
+read -p "请输入UUID（直接回车使用默认值：3ef440dc-8eac-4d33-b50d-382f54507e0c）：" UUID
 if [[ -z ${UUID} ]]; then
 UUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
 fi
