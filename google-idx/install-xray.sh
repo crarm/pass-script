@@ -20,7 +20,7 @@ sed -i 's/$PORT/'$PORT'/g' config.json
 sed -i 's/$UUID/'$UUID'/g' config.json
 
 # 4. create startup.sh
-wget https:https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/startup.sh
+wget https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/startup.sh
 sed -i 's#$PWD#'$PWD'#g' startup.sh
 sed -i 's#$Xray#'$Xray'#g' startup.sh
 chmod +x startup.sh
