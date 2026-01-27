@@ -1,17 +1,24 @@
 #!/usr/bin/env sh
 
-RPORT=8080
-RUUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
-
-read -p "设置节点使用的端口[1-65535]（直接回车使用默认值：$RPORT）：" port
-
+read -p "设置节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" PORT
+sleep 1
 if [[ -z $PORT ]]; then
-PORT=$RPORT
+PORT=$(shuf -i 10000-65535 -n 1)
+until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] 
+do
+[[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] && yellow "\n端口被占用，请重新输入端口" && read -p "自定义端口:" PORT
+done
+else
+until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]]
+do
+[[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$PORT") ]] && yellow "\n端口被占用，请重新输入端口" && read -p "自定义端口:" PORT
+done
 fi
+sleep 1
 
-read -p "请输入UUID（直接回车使用默认值：$RUUID）：" UUID
+read -p "请输入UUID（直接回车使用默认值：3ef440dc-8eac-4d33-b50d-382f54507e0c）：" UUID
 if [[ -z ${UUID} ]]; then
-UUID=$RUUID
+UUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
 fi
 
 # 1. init directory
