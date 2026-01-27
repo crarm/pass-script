@@ -28,7 +28,14 @@ chmod +x startup.sh
 # 5. start Xray
 $PWD/startup.sh
 
-# 6. print node info
+# 6. enter export domain
+read -p "请输入8080端口的外部链接：" DOMAIN
+
+# 7. print node info
 echo '---------------------------------------------------------------'
-echo "vless://$UUID@example.domain.com:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp"
+echo "vless://$UUID@e$DOMAIN:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp"
 echo '---------------------------------------------------------------'
+echo "节点信息保存在文件：$PWD/node-info.txt"
+echo "vless://$UUID@e$DOMAIN:443?encryption=none&security=tls&alpn=http%2F1.1&fp=chrome&type=xhttp&path=%2F&mode=auto#idx-xhttp" > node-info.txt
+
+
