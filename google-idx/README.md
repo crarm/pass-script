@@ -10,6 +10,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/m
 UUID="" VMWSPORT="" VMWSDOMAIN="" VLWSPORT="" VLWSDOMAIN="" VLXHTTPPORT="" VLXHTTPDOMAIN="" VLXHTTPDIRECTDOMAIN="" LOCAL="" ARGO_AUTH="" bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/install-xray.sh)
 ```
 说明：
+
 UUID：uuid
 
 VMWSPORT：vmess-ws节点监听端口
