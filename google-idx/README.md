@@ -32,10 +32,3 @@ LOCAL：节点名地区前缀，可为空
 
 ARGO_AUTH：cloudflare隧道token
 
-
-## ttyd Usage
-
-```bash
-export USER=google PASS=123456
-bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/ttyd.sh)
-```
