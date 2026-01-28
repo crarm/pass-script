@@ -90,8 +90,10 @@ chmod +x startup.sh
 $PWD/startup.sh
 
 # 6. enter export domain
+if [[ -z $VLXHTTPDIRECTDOMAIN ]]; then
 echo "！请打开vless-xhttp端口【 $VLXHTTPPORT 】的外部访问！"
 read -p "请输入vless-xhttp端口【 $VLXHTTPPORT 】的外部访问链接：" VLXHTTPDIRECTDOMAIN
+fi
 
 # 7. download cloudflared
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
