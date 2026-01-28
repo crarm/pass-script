@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-if [[ -z $VMWSPORT ]]; then
+if [[ -z "$VMWSPORT" ]]; then
 read -p "设置vmess-ws节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VMWSPORT
 sleep 1
-if [[ -z $VMWSPORT ]]; then
+if [[ -z "$VMWSPORT" ]]; then
 VMWSPORT=$(shuf -i 10000-65535 -n 1)
 until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VMWSPORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VMWSPORT") ]] 
 do
@@ -18,10 +18,10 @@ fi
 fi
 sleep 1
 
-if [[ -z $VLWSPORT ]]; then
+if [[ -z "$VLWSPORT" ]]; then
 read -p "设置vless-ws节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VLWSPORT
 sleep 1
-if [[ -z $VLWSPORT ]]; then
+if [[ -z "$VLWSPORT" ]]; then
 VLWSPORT=$(shuf -i 10000-65535 -n 1)
 until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLWSPORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLWSPORT") ]] 
 do
@@ -36,10 +36,10 @@ fi
 fi
 sleep 1
 
-if [[ -z $VLXHTTPPORT ]]; then
+if [[ -z "$VLXHTTPPORT" ]]; then
 read -p "设置vless-xhttp节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VLXHTTPPORT
 sleep 1
-if [[ -z $VLXHTTPPORT ]]; then
+if [[ -z "$VLXHTTPPORT" ]]; then
 VLXHTTPPORT=$(shuf -i 10000-65535 -n 1)
 until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLXHTTPPORT") && -z $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLXHTTPPORT") ]] 
 do
@@ -88,9 +88,9 @@ chmod +x startup.sh
 $PWD/startup.sh
 
 # 6. enter export domain
-if [[ -z $VLXHTTPDIRECTDOMAIN ]]; then
-echo "！请打开vless-xhttp端口【 $VLXHTTPPORT 】的外部访问！"
-read -p "请输入vless-xhttp端口【 $VLXHTTPPORT 】的外部访问链接：" VLXHTTPDIRECTDOMAIN
+if [[ -z "$VLXHTTPDIRECTDOMAIN" ]]; then
+echo "！请打开vless-xhttp端口【 $VLXHTTPPORT 】的 IDX 外部访问！"
+read -p "请输入vless-xhttp端口【 $VLXHTTPPORT 】的 IDX 外部访问链接：" VLXHTTPDIRECTDOMAIN
 fi
 
 # 7. download cloudflared
