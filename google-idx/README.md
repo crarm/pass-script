@@ -7,7 +7,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/m
 -------------------------------------------------------
 前置配置方式：
 ```bash
-UUID="" VMWSPORT="" VMWSDOMAIN="" VLWSPORT="" VLWSDOMAIN="" VLXHTTPPORT="" VLXHTTPDOMAIN="" VLXHTTPDIRECTDOMAIN="" LOCAL="" ARGO_AUTH="" bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/install-xray.sh)
+UUID="" VMWSPORT="" VMWSDOMAIN="" VLWSPORT="" VLWSDOMAIN="" VLXHTTPPORT="" VLXHTTPDOMAIN="" VLXHTTPDIRECTDOMAIN="" LOCAL="" ARGO_AUTH="" \
+bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/install-xray.sh)
 ```
 说明：
 
