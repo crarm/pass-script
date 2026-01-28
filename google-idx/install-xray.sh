@@ -54,12 +54,6 @@ fi
 fi
 sleep 1
 
-if [[ -z ${UUID} ]]; then
-read -p "请输入UUID（直接回车使用默认值：3ef440dc-8eac-4d33-b50d-382f54507e0c）：" UUID
-if [[ -z ${UUID} ]]; then
-UUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
-fi
-fi
 
 # 1. init directory
 Xray=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
@@ -71,6 +65,13 @@ wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zi
 unzip $Xray.zip
 mv xray $Xray
 rm -f $Xray.zip
+
+if [[ -z ${UUID} ]]; then
+read -p "请输入UUID（直接回车随机生成）：" UUID
+if [[ -z ${UUID} ]]; then
+UUID=$("$PWD/$Xray" uuid)
+fi
+fi
 
 # 3. add config file
 wget -O config.json https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/xray-config.json
