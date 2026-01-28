@@ -100,7 +100,7 @@ if [[ -z ${ARGO_AUTH} ]]; then
 read -p "请输入cloudflare 隧道 TOKEN【以eyJh开头】：" ARGO_AUTH
 fi
 nohup $PWD/cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token "${ARGO_AUTH}" >/dev/null 2>&1 &
-echo "nohup $PWD/cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token ${ARGO_AUTH} >/dev/null 2>&1 &' >>startup.sh
+echo "nohup $PWD/cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token ${ARGO_AUTH} >/dev/null 2>&1 &" >>startup.sh
 
 # 7. set tennel domain
 if [[ -z ${VMWSDOMAIN} ]]; then
