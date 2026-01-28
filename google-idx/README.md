@@ -1,6 +1,6 @@
 ## install-xray Usage
 
-交互输入方式：
+交互配置方式：
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/install-xray.sh)
 ```
