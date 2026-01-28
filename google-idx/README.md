@@ -27,7 +27,7 @@ VLXHTTPDOMAIN：vless-xhttp节点cloudflare隧道域名
 
 VLXHTTPDIRECTDOMAIN：vless-xhttp节点 idx 公开访问域名
 
-LOCAL：地区前缀，可为空
+LOCAL：节点名地区前缀，可为空
 
 ARGO_AUTH：cloudflare隧道token
 
