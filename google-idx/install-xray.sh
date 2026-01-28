@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+if [[ -z $VMWSPORT ]]; then
 read -p "设置vmess-ws节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VMWSPORT
 sleep 1
 if [[ -z $VMWSPORT ]]; then
@@ -14,8 +15,10 @@ do
 [[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VMWSPORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VMWSPORT") ]] && yellow "\n端口被占用，请重新输入端口" && read -p "自定义端口:" PORT
 done
 fi
+fi
 sleep 1
 
+if [[ -z $VLWSPORT ]]; then
 read -p "设置vless-ws节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VLWSPORT
 sleep 1
 if [[ -z $VLWSPORT ]]; then
@@ -30,8 +33,10 @@ do
 [[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLWSPORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLWSPORT") ]] && yellow "\n端口被占用，请重新输入端口" && read -p "自定义端口:" PORT
 done
 fi
+fi
 sleep 1
 
+if [[ -z $VLXHTTPPORT ]]; then
 read -p "设置vless-xhttp节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VLXHTTPPORT
 sleep 1
 if [[ -z $VLXHTTPPORT ]]; then
@@ -46,11 +51,14 @@ do
 [[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLXHTTPPORT") || -n $(ss -tunlp | grep -w tcp | awk '{print $5}' | sed 's/.*://g' | grep -w "$VLXHTTPPORT") ]] && yellow "\n端口被占用，请重新输入端口" && read -p "自定义端口:" PORT
 done
 fi
+fi
 sleep 1
 
+if [[ -z ${UUID} ]]; then
 read -p "请输入UUID（直接回车使用默认值：3ef440dc-8eac-4d33-b50d-382f54507e0c）：" UUID
 if [[ -z ${UUID} ]]; then
 UUID='3ef440dc-8eac-4d33-b50d-382f54507e0c'
+fi
 fi
 
 # 1. init directory
@@ -88,14 +96,22 @@ read -p "请输入vless-xhttp端口【 $VLXHTTPPORT 】的外部访问链接："
 # 7. download cloudflared
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
 chmod +x cloudflared
+if [[ -z ${ARGO_AUTH} ]]; then
 read -p "请输入cloudflare 隧道 TOKEN【以eyJh开头】：" ARGO_AUTH
+fi
 nohup cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token "${ARGO_AUTH}" >/dev/null 2>&1 &
 echo 'nohup cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token "'${ARGO_AUTH}'" >/dev/null 2>&1 &' >>startup.sh
 
 # 7. set tennel domain
+if [[ -z ${VMWSDOMAIN} ]]; then
 read -p "请在cloudflare设置vmess-ws端口$VMWSPORT的隧道域名，其域名为：" VMWSDOMAIN
+fi
+if [[ -z ${VLWSDOMAIN} ]]; then
 read -p "请在cloudflare设置vless-ws端口$VLWSPORT的隧道域名，其域名为：" VLWSDOMAIN
+fi
+if [[ -z ${VLXHTTPDOMAIN} ]]; then
 read -p "请在cloudflare设置vless-xhttp端口$VLXHTTPPORT的隧道域名，其域名为：" VLXHTTPDOMAIN
+fi
 
 # 7. print node info
 echo '节点信息如下：'
