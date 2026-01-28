@@ -61,7 +61,7 @@ mkdir -p app/$Xray
 cd app/$Xray
 
 # 2. download and extract Xray
-wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip -O $Xray.zip
+wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip -Oq $Xray.zip
 unzip $Xray.zip
 mv xray $Xray
 rm -f $Xray.zip
@@ -71,7 +71,7 @@ UUID=$("$PWD/$Xray" uuid)
 fi
 
 # 3. add config file
-wget -O config.json https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/xray-config.json
+wget -Oq config.json https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/xray-config.json
 sed -i 's/$UUID/'$UUID'/g' config.json
 sed -i 's#$VMWSPORT#'$VMWSPORT'#g' config.json
 sed -i 's#$VLWSPORT#'$VLWSPORT'#g' config.json
@@ -79,7 +79,7 @@ sed -i 's#$VLXHTTPPORT#'$VLXHTTPPORT'#g' config.json
 sed -i 's#$UUID#'$UUID'#g' config.json
 
 # 4. create startup.sh
-wget https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/startup.sh
+wget -q https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/startup.sh
 sed -i 's#$PWD#'$PWD'#g' startup.sh
 sed -i 's#$Xray#'$Xray'#g' startup.sh
 chmod +x startup.sh
@@ -94,7 +94,7 @@ read -p "请输入vless-xhttp端口【 $VLXHTTPPORT 】的 IDX 外部访问链�
 fi
 
 # 7. download cloudflared
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -Oq cloudflared
 chmod +x cloudflared
 if [[ -z ${ARGO_AUTH} ]]; then
 read -p "请输入cloudflare 隧道 TOKEN【以eyJh开头】：" ARGO_AUTH
