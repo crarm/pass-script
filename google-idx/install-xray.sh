@@ -67,10 +67,7 @@ mv xray $Xray
 rm -f $Xray.zip
 
 if [[ -z ${UUID} ]]; then
-read -p "请输入UUID（直接回车随机生成）：" UUID
-if [[ -z ${UUID} ]]; then
 UUID=$("$PWD/$Xray" uuid)
-fi
 fi
 
 # 3. add config file
