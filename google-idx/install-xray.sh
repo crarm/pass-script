@@ -93,9 +93,9 @@ nohup cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2
 echo 'nohup cloudflared tunnel --no-autoupdate --edge-ip-version auto --protocol http2 run --token "'${ARGO_AUTH}'" >/dev/null 2>&1 &' >>startup.sh
 
 # 7. set tennel domain
-read -p "请在cloudflare设置vmess-ws端口$VMWSPORT的隧道，其域名为：" VMWSDOMAIN
-read -p "请在cloudflare设置vless-ws端口$VLWSPORT的隧道，其域名为：" VLWSDOMAIN
-read -p "请在cloudflare设置vless-xhttp端口$VLXHTTPPORT的隧道，其域名为：" VLXHTTPDOMAIN
+read -p "请在cloudflare设置vmess-ws端口$VMWSPORT的隧道域名，其域名为：" VMWSDOMAIN
+read -p "请在cloudflare设置vless-ws端口$VLWSPORT的隧道域名，其域名为：" VLWSDOMAIN
+read -p "请在cloudflare设置vless-xhttp端口$VLXHTTPPORT的隧道域名，其域名为：" VLXHTTPDOMAIN
 
 # 7. print node info
 echo '节点信息如下：'
