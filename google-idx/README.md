@@ -25,7 +25,7 @@ VLXHTTPPORT：vless-xhttp节点监听端口
 
 VLXHTTPDOMAIN：vless-xhttp节点cloudflare隧道域名
 
-VLXHTTPDIRECTDOMAIN：vless-xhttp节点 idx 公开访问域名
+VLXHTTPDIRECTDOMAIN：vless-xhttp端口的 idx 公开访问域名
 
 LOCAL：节点名地区前缀，可为空
 
