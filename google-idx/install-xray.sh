@@ -184,7 +184,8 @@ PREFIX=${PREFIX}-
 fi
 
 # 7. print node info
-echo '节点信息如下：'
+echo
+echo '安装成功，节点信息如下：'
 echo '---------------------------------------------------------------'
 echo vmess-ws argo:
 vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${PREFIX}vmess+ws-argo\", \"add\": \"$VMWSDOMAIN\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
