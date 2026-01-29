@@ -1,5 +1,71 @@
 #!/usr/bin/env sh
 
+ENTERDIR=$PWD
+####添加、修改启动项
+# 功能: 更新或添加 onStart 中的启动项配置
+# 函数: update_onstart_item
+# 参数1: 启动项名称 (如: xray, idx, monitor 等)
+# 参数2: 启动项值 (如: "/path/to/script.sh")
+update_onstart_item() {
+    local item_name="$1"
+    local item_value="$2"
+    
+    # 创建备份
+	  local config_file="${ENTERDIR}/.idx/dev.nix"
+    local backup_file="${ENTERDIR}/dev.nix.bak" 
+    cp "$config_file" "$backup_file"
+    
+    # 使用awk处理
+    awk -v item_name="$item_name" -v item_value="$item_value" -v mypath="$ENTERDIR" '
+    BEGIN {
+        in_onStart = 0           # 是否在onStart块内
+        item_found = 0           # 是否找到指定项
+        indent = ""              # 缩进
+    }
+    
+    # 进入onStart块
+    /^[[:space:]]*onStart[[:space:]]*=[[:space:]]*\{/ {
+        in_onStart = 1
+        print $0
+        next
+    }
+    
+    # 在onStart块内
+    in_onStart {
+        # 检查是否是指定的启动项配置行
+        if ($0 ~ "^[[:space:]]*" item_name "[[:space:]]*=") {
+            item_found = 1
+            # 更新项的值
+            if (match($0, /^[[:space:]]*/)) {
+                indent = substr($0, RSTART, RLENGTH)
+            }
+            print indent item_name " = \"" item_value "\";"
+            next
+        }
+        
+        # 检查onStart块是否结束
+        if (/\}[[:space:]]*;[[:space:]]*$/ || /\}[[:space:]]*,[[:space:]]*$/) {
+            # 如果没有找到指定项，在结束前添加
+            if (!item_found) {
+                if (match($0, /^[[:space:]]*/)) {
+                    indent = substr($0, RSTART, RLENGTH)
+                }
+                # 在}前添加配置项（保持缩进一致）
+                item_indent = indent "  "
+                print item_indent item_name " = \"" item_value "\";"
+            }
+            in_onStart = 0
+        }
+        
+        print $0
+        next
+    }
+    
+    # 其他行
+    { print }
+    ' "$config_file" > "/tmp/temp.nix" && cat /tmp/temp.nix > "$config_file"
+}
+
 if [[ -z "$VMWSPORT" ]]; then
 read -p "设置vmess-ws节点使用的端口[1-65535]（回车跳过为10000-65535之间的随机端口）：" VMWSPORT
 sleep 1
