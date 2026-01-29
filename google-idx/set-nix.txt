@@ -2,8 +2,8 @@
 ##在packages添加包
 add_package() {
     # 创建备份
-	local config_file="${PWD}/.idx/dev.nix"
-    local backup_file="${PWD}/dev.nix.bak" 
+	local config_file="${ENTERDIR}/.idx/dev.nix"
+    local backup_file="${ENTERDIR}/dev.nix.bak" 
     cp "$config_file" "$backup_file"
 	
     local full_package_name="$1"
@@ -51,8 +51,8 @@ add_package() {
 ##添加docker服务
 add_docker_services() {
     # 创建备份
-	local config_file="${PWD}/.idx/dev.nix"
-    local backup_file="${PWD}/dev.nix.bak" 
+	local config_file="${ENTERDIR}/.idx/dev.nix"
+    local backup_file="${ENTERDIR}/dev.nix.bak" 
     cp "$config_file" "$backup_file"
 	
     awk '
@@ -107,12 +107,12 @@ update_onstart_item() {
     local item_value="$2"
     
     # 创建备份
-	local config_file="${PWD}/.idx/dev.nix"
-    local backup_file="${PWD}/dev.nix.bak" 
+	local config_file="${ENTERDIR}/.idx/dev.nix"
+    local backup_file="${ENTERDIR}/dev.nix.bak" 
     cp "$config_file" "$backup_file"
     
     # 使用awk处理
-    awk -v item_name="$item_name" -v item_value="$item_value" -v mypath="$PWD" '
+    awk -v item_name="$item_name" -v item_value="$item_value" -v mypath="$ENTERDIR" '
     BEGIN {
         in_onStart = 0           # 是否在onStart块内
         item_found = 0           # 是否找到指定项
