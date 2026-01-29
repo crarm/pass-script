@@ -7,7 +7,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/m
 -------------------------------------------------------
 前置配置方式：
 ```bash
-UUID="" VMWSPORT="" VMWSDOMAIN="" VLWSPORT="" VLWSDOMAIN="" VLXHTTPPORT="" VLXHTTPDOMAIN="" VLXHTTPDIRECTDOMAIN="" LOCAL="" ARGO_AUTH="" \
+UUID="" VMWSPORT="" VMWSDOMAIN="" VLWSPORT="" VLWSDOMAIN="" VLXHTTPPORT="" VLXHTTPDOMAIN="" VLXHTTPDIRECTDOMAIN="" PREFIX="" ARGO_AUTH="" \
 bash <(curl -Ls https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/google-idx/install-xray.sh)
 ```
 说明：
@@ -28,7 +28,7 @@ VLXHTTPDOMAIN：vless-xhttp节点cloudflare隧道域名
 
 VLXHTTPDIRECTDOMAIN：vless-xhttp端口的 idx 公开访问域名
 
-LOCAL：节点名地区前缀，可为空
+PREFIX：节点名自定义前缀，可为空
 
 ARGO_AUTH：cloudflare隧道token
 
