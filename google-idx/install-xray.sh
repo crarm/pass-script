@@ -112,54 +112,54 @@ fi
 if [[ -z ${VLXHTTPDOMAIN} ]]; then
 read -p "请在cloudflare设置vless-xhttp端口$VLXHTTPPORT的隧道域名，其域名为：" VLXHTTPDOMAIN
 fi
-if [[ -n ${LOCAL} ]]; then
-LOCAL=${LOCAL}-
+if [[ -n ${PREFIX} && ${PREFIX: -1} != "-" ]]; then
+PREFIX=${PREFIX}-
 fi
 
 # 7. print node info
 echo '节点信息如下：'
 echo '---------------------------------------------------------------'
 echo vmess-ws argo:
-vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${LOCAL}vmess+ws-argo\", \"add\": \"$VMWSDOMAIN\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
+vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${PREFIX}vmess+ws-argo\", \"add\": \"$VMWSDOMAIN\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
 echo $vm_ws_argo_link
 echo $vm_ws_argo_link> node.info
 
-vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${LOCAL}vmess+ws-argo\", \"add\": \"pyip.ygkkk.dpdns.org\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"$VMWSDOMAIN\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
+vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${PREFIX}vmess+ws-argo\", \"add\": \"pyip.ygkkk.dpdns.org\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"$VMWSDOMAIN\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
 echo $vm_ws_argo_link
 echo $vm_ws_argo_link>> node.info
 
-vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${LOCAL}vmess+ws-argo\", \"add\": \"cdns.doon.eu.org\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"$VMWSDOMAIN\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
+vm_ws_argo_link="vmess://$(echo "{ \"v\": \"2\", \"ps\": \"${PREFIX}vmess+ws-argo\", \"add\": \"cdns.doon.eu.org\", \"port\": \"443\", \"id\": \"$UUID\",  \"scy\": \"auto\", \"net\": \"ws\", \"type\": \"none\", \"tls\": \"tls\", \"path\": \"/\", \"host\": \"$VMWSDOMAIN\", \"fp\": \"chrome\", \"alpn\": \"h2,http/1.1\"}" | base64 -w0)"
 echo $vm_ws_argo_link
 echo $vm_ws_argo_link>> node.info
 
 echo vless-ws argo
-vl_ws_argo_link="vless://$UUID@$VLWSDOMAIN:443?type=ws&encryption=none&path=%2F&host=&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bws-argo"
+vl_ws_argo_link="vless://$UUID@$VLWSDOMAIN:443?type=ws&encryption=none&path=%2F&host=&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bws-argo"
 echo $vl_ws_argo_link
 echo $vl_ws_argo_link>> node.info
 
-vl_ws_argo_link="vless://$UUID@pyip.ygkkk.dpdns.org:443?type=ws&encryption=none&path=%2F&host=$VLWSDOMAIN&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bws-argo"
+vl_ws_argo_link="vless://$UUID@pyip.ygkkk.dpdns.org:443?type=ws&encryption=none&path=%2F&host=$VLWSDOMAIN&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bws-argo"
 echo $vl_ws_argo_link
 echo $vl_ws_argo_link>> node.info
 
-vl_ws_argo_link="vless://$UUID@cdns.doon.eu.org:443?type=ws&encryption=none&path=%2F&host=$VLWSDOMAIN&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bws-argo"
+vl_ws_argo_link="vless://$UUID@cdns.doon.eu.org:443?type=ws&encryption=none&path=%2F&host=$VLWSDOMAIN&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bws-argo"
 echo $vl_ws_argo_link
 echo $vl_ws_argo_link>> node.info
 
 echo vless-xhttp argo
-vl_xhttp_argo_link="vless://$UUID@$VLXHTTPDOMAIN:443?type=xhttp&encryption=none&path=%2F&host=&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bxhttp-argo"
+vl_xhttp_argo_link="vless://$UUID@$VLXHTTPDOMAIN:443?type=xhttp&encryption=none&path=%2F&host=&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bxhttp-argo"
 echo $vl_xhttp_argo_link
 echo $vl_xhttp_argo_link>> node.info
 
-vl_xhttp_argo_link="vless://$UUID@pyip.ygkkk.dpdns.org:443?type=xhttp&encryption=none&path=%2F&host=$VLXHTTPDOMAIN&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bxhttp-argo"
+vl_xhttp_argo_link="vless://$UUID@pyip.ygkkk.dpdns.org:443?type=xhttp&encryption=none&path=%2F&host=$VLXHTTPDOMAIN&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bxhttp-argo"
 echo $vl_xhttp_argo_link
 echo $vl_xhttp_argo_link>> node.info
 
-vl_xhttp_argo_link="vless://$UUID@cdns.doon.eu.org:443?type=xhttp&encryption=none&path=%2F&host=$VLXHTTPDOMAIN&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bxhttp-argo"
+vl_xhttp_argo_link="vless://$UUID@cdns.doon.eu.org:443?type=xhttp&encryption=none&path=%2F&host=$VLXHTTPDOMAIN&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bxhttp-argo"
 echo $vl_xhttp_argo_link
 echo $vl_xhttp_argo_link>> node.info
 
 echo vless-xhttp 直连:
-vl_xhttp_direct_link="vless://$UUID@$VLXHTTPDIRECTDOMAIN:443?type=xhttp&encryption=none&path=%2F&host=&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${LOCAL}vless%2Bxhttp-direct"
+vl_xhttp_direct_link="vless://$UUID@$VLXHTTPDIRECTDOMAIN:443?type=xhttp&encryption=none&path=%2F&host=&mode=auto&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#${PREFIX}vless%2Bxhttp-direct"
 echo $vl_xhttp_direct_link
 echo $vl_xhttp_direct_link>> node.info
 echo '---------------------------------------------------------------'
