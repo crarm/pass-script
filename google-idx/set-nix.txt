@@ -1,7 +1,8 @@
-config_file="$PWD/.idx/dev.nix"
+
 ##在packages添加包
 add_package() {
     # 创建备份
+	local config_file="${PWD}/.idx/dev.nix"
     local backup_file="${PWD}/dev.nix.bak" 
     cp "$config_file" "$backup_file"
 	
@@ -50,6 +51,7 @@ add_package() {
 ##添加docker服务
 add_docker_services() {
     # 创建备份
+	local config_file="${PWD}/.idx/dev.nix"
     local backup_file="${PWD}/dev.nix.bak" 
     cp "$config_file" "$backup_file"
 	
@@ -105,6 +107,7 @@ update_onstart_item() {
     local item_value="$2"
     
     # 创建备份
+	local config_file="${PWD}/.idx/dev.nix"
     local backup_file="${PWD}/dev.nix.bak" 
     cp "$config_file" "$backup_file"
     
@@ -158,3 +161,4 @@ update_onstart_item() {
     { print }
     ' "$config_file" > "/tmp/temp.nix" && cat /tmp/temp.nix > "$config_file"
 }
+
