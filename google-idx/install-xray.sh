@@ -64,6 +64,7 @@ update_onstart_item() {
     # 其他行
     { print }
     ' "$config_file" > "/tmp/temp.nix" && cat /tmp/temp.nix > "$config_file"
+	rm /tmp/temp.nix
 }
 
 if [[ -z "$VMWSPORT" ]]; then
