@@ -16,7 +16,7 @@ update_onstart_item() {
     cp "$config_file" "$backup_file"
     
     # 使用awk处理
-    awk -v item_name="$item_name" -v item_value="$item_value" -v mypath="$ENTERDIR" '
+    awk -v item_name="$item_name" -v item_value="$item_value" '
     BEGIN {
         in_onStart = 0           # 是否在onStart块内
         item_found = 0           # 是否找到指定项
