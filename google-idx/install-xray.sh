@@ -198,7 +198,7 @@ wget -q https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/goog
 sed -i 's#$PWD#'$PWD'#g' startup.sh
 sed -i 's#$Xray#'$Xray'#g' startup.sh
 chmod +x startup.sh
-nix_add_docker_services
+#nix_add_docker_services
 nix_update_onstart_item "xray" "$PWD/startup.sh"
 
 # 5. start Xray
