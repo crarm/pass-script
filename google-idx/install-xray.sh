@@ -6,7 +6,7 @@ ENTERDIR=$PWD
 # 函数: update_onstart_item
 # 参数1: 启动项名称 (如: xray, idx, monitor 等)
 # 参数2: 启动项值 (如: "/path/to/script.sh")
-update_onstart_item() {
+nix_update_onstart_item() {
     local item_name="$1"
     local item_value="$2"
     
@@ -65,6 +65,54 @@ update_onstart_item() {
     { print }
     ' "$config_file" > "/tmp/temp.nix" && cat /tmp/temp.nix > "$config_file"
 	rm /tmp/temp.nix
+}
+
+##添加docker服务
+nix_add_docker_services() {
+    # 创建备份
+	local config_file="${ENTERDIR}/.idx/dev.nix"
+    local backup_file="${ENTERDIR}/dev.nix.bak" 
+    cp "$config_file" "$backup_file"
+	
+    awk '
+    BEGIN {
+        after_env = 0          # 标记是否在 env = {}; 之后
+        before_idx = 1         # 标记是否在 idx = { 之前
+        has_docker = 0         # 标记是否已有 docker 配置
+        added = 0              # 标记是否已添加
+    }
+    
+    # 找到 env = {};
+    /^[[:space:]]*env[[:space:]]*=[[:space:]]*\{\};/ {
+        after_env = 1
+        print $0
+        next
+    }
+    
+    # 找到 idx = {
+    /^[[:space:]]*idx[[:space:]]*=[[:space:]]*\{/ {
+        before_idx = 0
+        # 如果在这之前没有找到 docker 配置，就添加
+        if (after_env && !has_docker && !added) {
+            print "  services.docker.enable = true;"
+            added = 1
+        }
+        print $0
+        next
+    }
+    
+    # 在 env 之后、idx 之前检查是否有 docker 配置
+    after_env && before_idx {
+        if (/services\.docker\.enable[[:space:]]*=[[:space:]]*true/) {
+            has_docker = 1
+        }
+        print $0
+        next
+    }
+    
+    # 其他行
+    { print }
+    '  "$config_file" > "/tmp/temp.nix" && cat /tmp/temp.nix > "$config_file"
 }
 
 if [[ -z "$VMWSPORT" ]]; then
@@ -150,7 +198,8 @@ wget -q https://raw.githubusercontent.com/crarm/pass-script/refs/heads/main/goog
 sed -i 's#$PWD#'$PWD'#g' startup.sh
 sed -i 's#$Xray#'$Xray'#g' startup.sh
 chmod +x startup.sh
-update_onstart_item "xray" "$PWD/startup.sh"
+nix_add_docker_services
+nix_update_onstart_item "xray" "$PWD/startup.sh"
 
 # 5. start Xray
 $PWD/startup.sh
